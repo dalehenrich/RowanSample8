@@ -4,7 +4,7 @@
 "
 "
 	For adapting an existing github project to Rowan, it is necessary to reference the project
-		url and desirect commitish ... the project will be cloned as part of the creation 
+		url and desired commitish ... the project will be cloned as part of the creation 
 		process
 "
 	| projectName project projectHome |
@@ -28,6 +28,7 @@
 			projectsPath: 'rowan/projects'
 			projectUrl: 'https://github.com/dalehenrich/RowanExample'
 			committish: 'master' 
+			committishType: 'branch'
 			comment: 'Example project exposing the standard project creation api'.
 	project
 		addComponentNamed: 'Core'
@@ -36,27 +37,25 @@
 					add: 'core'  -> {};
 					add: 'tests' -> { 'core' };
 					yourself)
-			gemstoneDefaultSymboldDictionaryForUser: 'SystemUser' -> 'ExampleCore'
+			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'ExampleCore'
 			comment: 'Primary component used for loading entire system.';
 		addPackageNamed: 'Example-Core'
 			withConditions: { 'common' };
-		addPackageNamed: 'Rowan-Tests'
-			withConditions: { 'common' };
-			andGroupName: 'tests';
-		addPackageNamed: 'Example-GemStone-Extensions'
-			toComponentNamed: 'Kernel'
-			withConditions: { 'gemstone' }
-			withGemStoneSymbolDictName: 'SystemUser' -> 'Globals';
-		addPackageNamed: 'Rowan-Tests'
-			toComponentNamed: 'Core'
+		addPackageNamed: 'Example-Tests'
 			withConditions: { 'common' }
 			andGroupName: 'tests';
-		addPackageNamed: 'Rowan-GemStone-Test-Extensions'
+		addPackageNamed: 'Example-GemStone-Extensions'
+			toComponentNamed: 'Core'
+			withConditions: { 'gemstone' }
+			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
+		addPackageNamed: 'Example-GemStone-Test-Extensions'
 			toComponentNamed: 'Core'
 			withConditions: { 'gemstone' }
 			andGroupName: 'tests'
-			withGemStoneSymbolDictName: 'SystemUser' -> 'Globals';
+			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
 		yourself.
+
+	project create.
 
 	GsFile stdout 
 		nextPutAll: projectHome asFileReference printString;
