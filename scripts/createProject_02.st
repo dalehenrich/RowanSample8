@@ -3,13 +3,14 @@
 	Create a Rowan project from scratch, using all of the available defaults
 "
 
-	| projectName project |
-	projectName := 'Example'.
+	| projectName project projectHome |
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectName := 'Example02'.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
 		projectName: projectName 
-			projectHome: '$ROWAN_PROJECTS_HOME'
+			projectHome: projectHome
 			useGit: true
 			comment: 'Example project exposing the standard project creation api'.
 	project
@@ -29,5 +30,9 @@
 			withConditions: { 'gemstone' }
 			andGroupName: 'tests'
 			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
-		yourself
+		yourself.
+
+	GsFile stdout 
+		nextPutAll: projectHome asFileReference printString;
+		lf
 

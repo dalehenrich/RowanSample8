@@ -4,8 +4,9 @@
 		package attributes
 "
 
-	| projectName project |
-	projectName := 'Example'.
+	| projectName project projectHome |
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectName := 'Example03'.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
@@ -15,7 +16,7 @@
 			defaultComponentName: 'Core'
 			defaultGroupName: 'core'
 			packageFormat: 'tonel'
-			projectHome: '$ROWAN_PROJECTS_HOME'
+			projectHome: projectHome
 			specsPath: 'rowan/specs'
 			componentsPath: 'rowan/componenets'
 			packagesPath: 'rowan/src'
@@ -45,4 +46,9 @@
 			withConditions: { 'gemstone' }
 			andGroupName: 'tests'
 			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
-		yourself
+		yourself.
+
+	GsFile stdout 
+		nextPutAll: projectHome asFileReference printString;
+		lf
+

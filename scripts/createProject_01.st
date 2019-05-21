@@ -15,8 +15,9 @@
 				- package directory
 				- project directory
 "
-	| projectName project |
-	projectName := 'Example'.
+	| projectName project projectHome |
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectName := 'Example01'.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
@@ -26,7 +27,7 @@
 			defaultComponentName: 'Core'
 			defaultGroupName: 'core'
 			packageFormat: 'tonel'
-			projectHome: '$ROWAN_PROJECTS_HOME'
+			projectHome: projectHome
 			specsPath: 'rowan/specs'
 			componentsPath: 'rowan/componenets'
 			packagesPath: 'rowan/src'
@@ -61,6 +62,6 @@
 		yourself.
 
 	GsFile stdout 
-		nextPutAll: '$ROWAN_PROJECTS_HOME/RowanSample8' asFileReference printString;
+		nextPutAll: projectHome asFileReference printString;
 		lf
 

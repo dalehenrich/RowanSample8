@@ -7,8 +7,9 @@
 		url and desirect commitish ... the project will be cloned as part of the creation 
 		process
 "
-	| projectName project |
-	projectName := 'Example'.
+	| projectName project projectHome |
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectName := 'Example11'.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
@@ -18,7 +19,7 @@
 			defaultComponentName: 'Core'
 			defaultGroupName: 'core'
 			packageFormat: 'tonel'
-			projectHome: '$ROWAN_PROJECTS_HOME'
+			projectHome: projectHome
 			specsPath: 'rowan/specs'
 			componentsPath: 'rowan/componenets'
 			packagesPath: 'rowan/src'
@@ -53,4 +54,9 @@
 			withConditions: { 'gemstone' }
 			andGroupName: 'tests'
 			withGemStoneSymbolDictName: 'SystemUser' -> 'Globals';
-		yourself
+		yourself.
+
+	GsFile stdout 
+		nextPutAll: projectHome asFileReference printString;
+		lf
+
