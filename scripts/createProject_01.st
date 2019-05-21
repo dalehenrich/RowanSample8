@@ -16,8 +16,10 @@
 				- project directory
 "
 	| projectName project projectHome |
-	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home' asFileReference.
 	projectName := 'Example01'.
+
+	(projectHome / projectName) ensureDeleteAll.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
@@ -29,7 +31,7 @@
 			packageFormat: 'tonel'
 			projectHome: projectHome
 			specsPath: 'rowan/specs'
-			componentsPath: 'rowan/componenets'
+			componentsPath: 'rowan/components'
 			packagesPath: 'rowan/src'
 			projectsPath: 'rowan/projects'
 			useGit: true
@@ -47,7 +49,7 @@
 			withConditions: { 'common' };
 		addPackageNamed: 'Example-Core2'
 			withConditions: { 'common' };
-		addPackageNamed: 'Rowan-Tests'
+		addPackageNamed: 'Example-Tests'
 			withConditions: { 'common' }
 			andGroupName: 'tests';
 		addPackageNamed: 'Example-GemStone-Extensions'
@@ -60,6 +62,8 @@
 			andGroupName: 'tests'
 			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
 		yourself.
+
+	project export.
 
 	GsFile stdout 
 		nextPutAll: projectHome asFileReference printString;

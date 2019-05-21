@@ -8,8 +8,10 @@
 		process
 "
 	| projectName project projectHome |
-	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home'.
+	projectHome := '$ROWAN_PROJECTS_HOME/RowanSample8/home' asFileReference.
 	projectName := 'Example11'.
+
+	(projectHome / projectName) ensureDeleteAll.
 	Rowan projectNamed: projectName ifPresent: [:project | project unload ].
 
 	project := RwComponentProjectDefinition
@@ -21,10 +23,10 @@
 			packageFormat: 'tonel'
 			projectHome: projectHome
 			specsPath: 'rowan/specs'
-			componentsPath: 'rowan/componenets'
+			componentsPath: 'rowan/components'
 			packagesPath: 'rowan/src'
 			projectsPath: 'rowan/projects'
-			projectUrl: 'https://github.com/dalehenrich/RowanExample
+			projectUrl: 'https://github.com/dalehenrich/RowanExample'
 			committish: 'master' 
 			comment: 'Example project exposing the standard project creation api'.
 	project
@@ -36,7 +38,7 @@
 					yourself)
 			gemstoneDefaultSymboldDictionaryForUser: 'SystemUser' -> 'ExampleCore'
 			comment: 'Primary component used for loading entire system.';
-		addPackageNamed: Example-Core'
+		addPackageNamed: 'Example-Core'
 			withConditions: { 'common' };
 		addPackageNamed: 'Rowan-Tests'
 			withConditions: { 'common' };
