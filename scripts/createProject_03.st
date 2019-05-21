@@ -50,6 +50,8 @@
 			gemstoneDefaultSymbolDictionaryForUser: 'SystemUser' -> 'Globals';
 		yourself.
 
+	project export.
+
 	GsFile stdout 
 		nextPutAll: projectHome asFileReference printString;
 		lf
